@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Image</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #175694;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            color: #343a40;
+        }
+        .form-container {
+            margin-bottom: 20px;
+        }
+        .result-image {
+            margin-top: 20px;
+            border: 2px solid #343a40;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Upload an Image for Object Detection</h1>
+        <div class="form-container">
+            <form method="POST" enctype="multipart/form-data">
+                <input type="file" name="file" class="form-control-file mb-3" required>
+                <input type="submit" value="Upload" class="btn btn-primary">
+            </form>
+        </div>
+        {% if request.method == 'POST' %}
+        <div class="result-image">
+            <h2>Detected Image:</h2>
+            <img src="{{ url_for('send_file', filename='result_' + file.filename) }}" alt="Detected Image">
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
